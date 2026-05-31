@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notes, Task, and Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <h1>Notes, Task, and Time</h1>
+          <p class="creator">Created by Akhil Thadaparambil</p>
+        </div>
+        <div class="summary-strip" aria-label="Today summary">
+          <span><strong id="noteCount">0</strong> notes</span>
+          <span><strong id="taskCount">0</strong> tasks</span>
+          <span><strong id="doneCount">0</strong> done</span>
+          <span><strong id="miniClock">--:--</strong> now</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="studio" aria-label="Clock and note capture">
+          <div class="studio-media" aria-hidden="true"></div>
+          <div class="clock-panel">
+            <div class="clock-heading">
+              <div>
+                <p class="eyebrow">Current time</p>
+                <h2 id="clockHeading">Running clock</h2>
+              </div>
+              <span class="date-pill" id="currentDate">Today</span>
+            </div>
+
+            <div class="clock-card" aria-label="Running clock">
+              <div class="analog-clock" aria-hidden="true">
+                <span class="clock-tick top"></span>
+                <span class="clock-tick right"></span>
+                <span class="clock-tick bottom"></span>
+                <span class="clock-tick left"></span>
+                <span class="clock-hand hour-hand" id="hourHand"></span>
+                <span class="clock-hand minute-hand" id="minuteHand"></span>
+                <span class="clock-hand second-hand" id="secondHand"></span>
+                <span class="clock-center"></span>
+              </div>
+              <div class="digital-stack">
+                <span class="digital-time" id="currentTime">--:--:--</span>
+                <span class="digital-period" id="currentPeriod">Local time</span>
+              </div>
+            </div>
+
+            <form class="note-form" id="noteForm">
+              <label class="field-label" for="noteInput">Quick note</label>
+              <textarea id="noteInput" maxlength="420" placeholder="Capture a thought, reminder, or meeting note..."></textarea>
+              <button class="add-button" type="submit" aria-label="Save note">Save note</button>
+            </form>
+            <p class="status-message" id="noteMessage" role="status"></p>
+          </div>
+        </section>
+
+        <section class="workspace-grid">
+          <section class="panel" aria-labelledby="notesHeading">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Library</p>
+                <h2 id="notesHeading">Notes</h2>
+              </div>
+              <button class="small-button" id="clearNotesBtn" type="button">Clear all</button>
+            </div>
+            <div class="empty-state" id="emptyNotes">
+              <strong>No notes yet</strong>
+              <span>Save a quick note and it will appear here.</span>
+            </div>
+            <ul class="note-list" id="noteList" aria-label="Saved notes"></ul>
+          </section>
+
+          <section class="panel" aria-labelledby="tasksHeading">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">To-do list</p>
+                <h2 id="tasksHeading">Tasks</h2>
+              </div>
+              <button class="small-button" id="clearDoneBtn" type="button">Clear done</button>
+            </div>
+
+            <form class="task-form" id="taskForm">
+              <label class="sr-only" for="taskInput">New task</label>
+              <input id="taskInput" type="text" maxlength="96" placeholder="Add a task...">
+              <button class="add-button" type="submit" aria-label="Add task">Add</button>
+            </form>
+
+            <div class="task-tabs" role="tablist" aria-label="Task filter">
+              <button class="tab active" type="button" data-filter="all">All</button>
+              <button class="tab" type="button" data-filter="open">Open</button>
+              <button class="tab" type="button" data-filter="done">Done</button>
+            </div>
+
+            <div class="empty-state" id="emptyTasks">
+              <strong>No tasks yet</strong>
+              <span>Add one small thing to get started.</span>
+            </div>
+            <ul class="task-list" id="taskList" aria-label="Tasks"></ul>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <template id="noteTemplate">
+      <li class="note-item">
+        <div class="note-meta">
+          <input class="note-title" type="text" aria-label="Note title">
+          <span class="note-time"></span>
+        </div>
+        <textarea class="note-body" aria-label="Note body"></textarea>
+        <div class="item-actions">
+          <button class="small-button delete-note" type="button">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <template id="taskTemplate">
+      <li class="task-item">
+        <label class="task-check">
+          <input class="task-toggle" type="checkbox">
+          <span class="checkmark" aria-hidden="true"></span>
+          <input class="task-title" type="text" aria-label="Task title">
+        </label>
+        <button class="icon-button delete-task" type="button" aria-label="Delete task">
+          <span aria-hidden="true">x</span>
+        </button>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
